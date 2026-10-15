@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env.local
+.env.*.local
+*.tsbuildinfo
+.vercel/
+
+# Local development logs
+caresync-dev.*.log
+
