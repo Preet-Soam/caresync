@@ -10,6 +10,10 @@ CareSync is a responsive healthcare coordination MVP built with React, TypeScrip
 4. Start the local app with `npm run dev`.
 5. Open the URL shown by Vite and choose one of the three demo roles, or create a patient account after configuring Supabase.
 
+### Windows launcher
+
+Run `caresync.bat` from File Explorer or a terminal. Its menu has **Start** and **End**: Start checks for Node.js 20 or newer, installs packages if needed, launches the app at `http://127.0.0.1:5173`, and opens it in your browser. End stops the server started by the launcher. The Vite server runs in a separate window while the app is open.
+
 The Supabase anon key is intended for browser use and is constrained by row-level security. Never put a service-role key in `.env.local` under a `VITE_` name or in any browser bundle.
 
 ## Demo walkthrough
@@ -44,4 +48,4 @@ Appointment booking uses the database `book_appointment` RPC once a real patient
 
 ## Deployment
 
-Deploy the Vite frontend to Vercel with build command `npm run build` and output directory `dist`. Configure only `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for the browser build. Apply database migrations and configure authentication redirects in Supabase separately. Do not deploy with real patient information until access controls, operational processes, legal terms, and clinical workflows have received appropriate review.
+Deploy the Vite frontend to Render by connecting this repository as a Blueprint; Render reads `render.yaml`, builds with `npm ci && npm run build`, and serves `dist/` with a rewrite for React Router routes. If using Supabase, configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the Render service's build environment and configure authentication redirects in Supabase separately. Do not deploy with real patient information until access controls, operational processes, legal terms, and clinical workflows have received appropriate review.
