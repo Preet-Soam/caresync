@@ -18,5 +18,7 @@ export function recordDemoActivity(actor_role: DemoAuditEvent['actor_role'], act
 export function subscribeDemoAudit(onUpdate: () => void) {
   if (typeof window === 'undefined') return () => {}
   window.addEventListener(changeEvent, onUpdate)
-  return () => window.removeEventListener(changeEvent, onUpdate)
+  const syncStorage = (event:StorageEvent) => { if (event.key === storageKey) onUpdate() }
+  window.addEventListener('storage', syncStorage)
+  return () => { window.removeEventListener(changeEvent, onUpdate); window.removeEventListener('storage', syncStorage) }
 }

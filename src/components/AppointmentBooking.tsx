@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { ArrowRight, CalendarDays, Clock3, MapPin, ShieldCheck, Video, X } from 'lucide-react'
 import type { Doctor } from '../types'
 import { supabase } from '../lib/supabase'
+import { getDemoAppointments, subscribeDemoAppointments } from '../lib/demoStore'
 import { generateSlots, readDemoSchedule, readDemoTimezone, subscribeDemoSchedule, type AvailabilityRow } from '../lib/schedule'
 import '../slot-booking.css'
 
@@ -13,13 +14,18 @@ export default function AppointmentBooking({ doctor, isDemo, onClose, onRequest 
   const [selectedSlot, setSelectedSlot] = useState('')
   const [loading, setLoading] = useState(!isDemo)
   const [error, setError] = useState('')
-  const slots = useMemo(() => [...new Map(rows.flatMap(row => generateSlots(row, date, timeZone, rows)).sort((a,b) => a.startsAt.localeCompare(b.startsAt)).map(slot => [slot.startsAt, slot])).values()], [rows, date, timeZone])
+  const [reserved,setReserved]=useState(()=>isDemo?getDemoAppointments():[])
+  const slots = useMemo(() => [...new Map(rows.flatMap(row => generateSlots(row, date, timeZone, rows)).filter(slot=>!reserved.some(item=>item.doctorId===doctor.id&&(item.status==='pending'||item.status==='confirmed')&&item.scheduledStart===slot.startsAt)).sort((a,b) => a.startsAt.localeCompare(b.startsAt)).map(slot => [slot.startsAt, slot])).values()], [rows, date, timeZone, reserved, doctor.id])
 
   useEffect(() => {
     setSelectedSlot(''); setError('')
     if (isDemo) {
+      const syncReservations=()=>setReserved(getDemoAppointments())
+      syncReservations()
       setTimeZone(readDemoTimezone(doctor.id)); setRows(readDemoSchedule(doctor.id)); setLoading(false)
-      return subscribeDemoSchedule(doctor.id, () => setRows(readDemoSchedule(doctor.id)))
+      const unsubscribeAppointments=subscribeDemoAppointments(syncReservations)
+      const unsubscribeSchedule=subscribeDemoSchedule(doctor.id, () => setRows(readDemoSchedule(doctor.id)))
+      return()=>{unsubscribeAppointments();unsubscribeSchedule()}
     }
     if (!supabase) { setRows([]); setLoading(false); return }
     let active = true

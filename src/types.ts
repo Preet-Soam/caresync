@@ -1,5 +1,5 @@
 export type Role = 'patient' | 'doctor' | 'administrator'
-export type AppointmentStatus = 'confirmed' | 'pending' | 'completed' | 'cancelled'
+export type AppointmentStatus = 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'rejected'
 
 export interface Doctor {
   id: string; name: string; specialty: string; department: string; experience: string

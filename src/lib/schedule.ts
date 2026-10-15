@@ -8,6 +8,7 @@ export function readDemoTimezone(doctorId: string) {
 
 export function writeDemoTimezone(doctorId: string, value: string) {
   try { localStorage.setItem(timezoneKey(doctorId), value) } catch { /* browser-only demonstration */ }
+  window.dispatchEvent(new Event(`caresync-schedule-${doctorId}`))
 }
 
 export function localDateTimeToIso(date: string, time: string, timeZone: string): string | null {
@@ -68,8 +69,10 @@ export function writeDemoSchedule(doctorId: string, rows: AvailabilityRow[]) {
 
 export function subscribeDemoSchedule(doctorId: string, callback: () => void) {
   const eventName = `caresync-schedule-${doctorId}`
+  const syncStorage = (event:StorageEvent) => { if (event.key === key(doctorId) || event.key === timezoneKey(doctorId)) callback() }
   window.addEventListener(eventName, callback)
-  return () => window.removeEventListener(eventName, callback)
+  window.addEventListener('storage', syncStorage)
+  return () => { window.removeEventListener(eventName, callback); window.removeEventListener('storage', syncStorage) }
 }
 
 function parseCsv(text: string) {

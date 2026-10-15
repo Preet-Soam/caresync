@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { Bell, Check, CheckCheck, ClipboardList, FileText, MessageSquareText, Pill, ShieldCheck, X } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { readDemoAudit, subscribeDemoAudit } from '../lib/demoAudit'
+import { getDemoAppointments } from '../lib/demoStore'
 import type { Role } from '../types'
 import '../notifications.css'
 
 type Notice = { id: string; title: string; message: string; notification_type: string; related_appointment_id?: string | null; read_at: string | null; created_at: string }
-type Props = { userId?: string; role: Role; onOpen: (section: string) => void }
+type Props = { userId?: string; targetId?:string; role: Role; onOpen: (section: string) => void }
 
 const demoByRole: Record<Role, Omit<Notice, 'id' | 'read_at' | 'created_at'>[]> = {
   patient: [
@@ -26,14 +27,15 @@ const demoByRole: Record<Role, Omit<Notice, 'id' | 'read_at' | 'created_at'>[]> 
   ],
 }
 
-const demoNotices = (role: Role): Notice[] => demoByRole[role].map((item, index) => ({ ...item, id: `demo-${role}-${index}`, read_at: null, created_at: new Date(Date.now() - index * 3600000).toISOString() }))
 const demoReadKey = (role:Role) => `caresync-demo-notice-read-${role}`
-const noticesFromActivity = (role:Role): Notice[] => {
+const demoNotices = (role: Role): Notice[] => {let seen:string[]=[];try{seen=JSON.parse(localStorage.getItem(demoReadKey(role))||'[]')}catch{}return demoByRole[role].map((item,index)=>({ ...item,id:`demo-${role}-${index}`,read_at:seen.includes(`demo-${role}-${index}`)?new Date(0).toISOString():null,created_at:new Date(Date.now()-index*3600000).toISOString()}))}
+const noticesFromActivity = (role:Role,targetId?:string): Notice[] => {
   let seen:string[]=[];try{seen=JSON.parse(localStorage.getItem(demoReadKey(role))||'[]')}catch{}
   return readDemoAudit().flatMap(event=>{
     const action=event.action
     const relevant=role==='administrator'||(role==='patient'&&['appointment.requested','appointment.confirmed','appointment.rejected','consultation.created','prescription.issued'].includes(action))||(role==='doctor'&&['appointment.requested','appointment.confirmed','appointment.rejected','availability.created','availability.imported'].includes(action))
     if(!relevant)return[]
+    if(role!=='administrator'&&targetId&&['appointment','consultation','prescription','review'].includes(event.resource_type)){const visit=getDemoAppointments().find(item=>item.id===event.resource_id);if(!visit)return[];if(role==='patient'&&visit.patientId!==targetId)return[];if(role==='doctor'&&visit.doctorId!==targetId)return[]}
     const type=action.includes('prescription')?'prescription':action.includes('consultation')?'consultation':action.includes('review')?'review':action.includes('doctor')?'doctor_request':action.includes('appointment')?'appointment':'admin'
     const title=action==='appointment.requested'?(role==='doctor'?'New appointment request':'Appointment request received'):action==='appointment.confirmed'?'Appointment accepted':action==='appointment.rejected'?'Appointment update':action==='consultation.created'?'Visit summary available':action==='prescription.issued'?'Prescription ready':action==='availability.imported'?'Weekly timetable imported':action==='availability.created'?'Schedule updated':action==='review.submitted'?'Patient review submitted':action.replace(/[._]/g,' ').replace(/^\w/,letter=>letter.toUpperCase())
     const message=action==='appointment.requested'?(role==='doctor'?'A patient has requested a visit in your waiting list.':'Your visit request is waiting for the doctor’s response.'):action==='appointment.confirmed'?'Your appointment schedule has been updated.':action==='appointment.rejected'?'An appointment request was declined or cancelled.':action==='consultation.created'?'A consultation summary is available in medical records.':action==='prescription.issued'?'A new prescription is available in your patient workspace.':action.startsWith('availability.')?'Your practice availability was updated.':'A CareSync workspace activity was recorded.'
@@ -47,14 +49,14 @@ const sectionFor = (type: string, role: Role) => {
   return type === 'prescription' ? 'Prescriptions' : type === 'consultation' ? 'Medical records' : 'Appointments'
 }
 
-export default function NotificationCenter({ userId, role, onOpen }: Props) {
+export default function NotificationCenter({ userId, targetId, role, onOpen }: Props) {
   const [open, setOpen] = useState(false)
   const [notices, setNotices] = useState<Notice[]>(() => supabase && userId ? [] : demoNotices(role))
   const [busy, setBusy] = useState(false)
   const unread = useMemo(() => notices.filter(item => !item.read_at).length, [notices])
 
   useEffect(() => {
-    if (!supabase || !userId) { const sync=()=>setNotices([...noticesFromActivity(role),...demoNotices(role)].slice(0,10));sync();return subscribeDemoAudit(sync) }
+    if (!supabase || !userId) { const sync=()=>setNotices([...noticesFromActivity(role,targetId),...demoNotices(role)].slice(0,10));sync();return subscribeDemoAudit(sync) }
     let active = true
     const load = async () => {
       const { data, error } = await supabase!.from('notifications').select('id,title,message,notification_type,related_appointment_id,read_at,created_at').eq('user_id', userId).order('created_at', { ascending: false }).limit(30)
@@ -63,7 +65,7 @@ export default function NotificationCenter({ userId, role, onOpen }: Props) {
     void load()
     const channel = supabase.channel(`notifications-${userId}`).on('postgres_changes', { event: '*', schema: 'public', table: 'notifications', filter: `user_id=eq.${userId}` }, () => { void load() }).subscribe()
     return () => { active = false; void supabase!.removeChannel(channel) }
-  }, [userId, role])
+  }, [userId, role, targetId])
 
   const markRead = async (items: Notice[]) => {
     const unreadItems = items.filter(item => !item.read_at)
