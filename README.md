@@ -18,17 +18,21 @@ The Supabase anon key is intended for browser use and is constrained by row-leve
 
 ## Demo walkthrough
 
-Without `.env.local`, use the demo account shortcuts on `/login`. Patients can open **Find a doctor**, allow browser location to sort fictional nearby clinics, inspect addresses, qualifications, sample doctor and clinic ratings and comments, and open directions. After a completed visit, patients can submit separate doctor and clinic ratings and comments. Live comments are shown in the directory only after an administrator approves them in **Reviews**. Doctors can use **Clinic profile** to enter a practice address and optional map coordinates. Demo profile information is stored only in this browser. Appointment requests and reviews remain fictional demo actions.
+Without `.env.local`, use the demo account shortcuts on `/login`. Patients can open **Find a doctor**, allow browser location to sort fictional nearby clinics, inspect addresses, qualifications, sample doctor and clinic ratings and comments, and request an available appointment. Doctors can review the shared demo waiting list, accept or decline requests, create visit summaries, issue prescriptions, and publish weekly hours. Patient appointments, doctor visit summaries, and prescriptions sync between role workspaces within the same browser session. First-time patient and doctor workspaces show a quick setup guide that can be reopened in Settings. Demo clinical data is fictional and remains in browser memory.
+
+Doctors can set recurring weekday hours, one-day openings, blocked times, holidays, and leave in their practice time zone. The schedule editor includes a downloadable spreadsheet template and imports `.xlsx` and `.csv` timetables. Patients see the remaining available slots and choose an in-person, video, or phone appointment type. In connected mode, the database validates bookings against the saved schedule and time zone.
+
+After a completed visit, patients can submit separate doctor and clinic ratings and comments. Live comments are shown in the directory only after an administrator approves them in **Reviews**. Administrators can register and maintain clinics, hospitals, and diagnostic centres in **Hospitals & clinics**, assign approved providers to an active facility, and manage departments, applications, accounts, appointments, and the audit trail. An assigned active facility supplies the patient directory address and map coordinates.
 
 ## Supabase setup
 
 1. Create a Supabase project and link it with the Supabase CLI.
-2. Apply all migrations using `supabase db push`: the initial schema, clinic location fields, doctor/clinic ratings, and patient review comments.
+2. Apply all migrations using `supabase db push`: the initial schema, clinic location fields, doctor/clinic ratings and review comments, doctor workspace, administrator operations, connected health facilities, the audit log and role notifications, and doctor schedules with time-zone-aware booking.
 3. Add the project URL and anon key to `.env.local`, then restart the Vite server.
 4. Enable email/password authentication and configure the email templates and allowed redirect URLs for local and deployed origins.
 5. Sign up with a patient account. The database trigger creates its patient profile; client metadata cannot set a privileged role.
 6. Provision the first administrator only after verifying the intended account, using an authorized database operator workflow. The migration includes a commented setup example. Administrator provisioning must never be exposed to public signup.
-7. Doctor application and approval screens, consultations, prescriptions, private-file upload UI, and live admin analytics are not yet wired to the database. A doctor profile must already be approved before clinic details can be saved. Ratings appear in the live directory only after review moderation. The policies and schema are an initial base and must be reviewed before real health information is used.
+7. Doctors must have an approved profile before clinic details and workspace tools are available. Facility assignments are made by administrators and require an active facility; deactivating a facility clears its provider links. Ratings appear in the live directory only after review moderation. The policies and schema are an initial base and must be reviewed before real health information is used.
 
 Appointment booking uses the database `book_appointment` RPC once a real patient session and approved doctor profile exist. Its database exclusion constraint prevents overlapping active reservations for one doctor. The current UI's sample doctor IDs and time choices are for demo mode; the live directory reads approved doctor profiles and the database rejects unavailable times.
 
@@ -40,7 +44,7 @@ Appointment booking uses the database `book_appointment` RPC once a real patient
 
 ## Current scope and limitations
 
-- Landing, demo login, three role-based workspaces, nearby doctor directory, clinic location setup, appointment request demo, settings, and responsive navigation are present.
+- Landing, demo login, role-based onboarding, three role workspaces, nearby provider discovery, appointment slot booking, doctor schedules and consultation summaries, patient records and prescriptions, administrator controls, facility management, an audit log, and responsive navigation are present.
 - The connected auth and patient booking paths are early integrations. Not every dashboard action persists yet; demo actions are labeled accordingly.
 - The migration is a starting point for security review. It does not make a deployment compliant with any healthcare regulation. Review SQL policies and test them against real Supabase roles before real patient data.
 - Demo account shortcuts are intentionally unavailable when Supabase is configured, because they are not real authenticated sessions.
