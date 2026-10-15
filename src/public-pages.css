@@ -1,0 +1,138 @@
+/* Public landing and about pages */
+.home-services{padding-block:78px 82px}
+.home-service-grid{align-items:stretch}
+.home-feature-card{min-height:295px;padding:22px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 10px 30px #263b5708;transition:transform .2s,box-shadow .2s}
+.home-feature-card:hover{transform:translateY(-3px);box-shadow:0 16px 35px #263b5712}
+.home-feature-card h3{font-size:20px;line-height:1.35;margin:9px 0}
+.home-feature-card>p{font-size:12px;line-height:1.7;min-height:0;margin:0;max-width:300px}
+.home-feature-card .service-icon{width:44px;height:44px}
+.home-feature-card>a{margin-top:auto;padding-top:17px;font-size:11px}
+.home-emergency{background:#fff8f3;border-block:1px solid #f5eadd}
+.home-emergency-inner{min-height:142px;padding-block:25px;display:grid;grid-template-columns:43px minmax(0,1fr) auto;align-items:center;gap:16px}
+.home-emergency-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#f8e8dc;color:#c87552}
+.home-emergency-icon svg{width:21px}
+.home-emergency .eyebrow{color:#bd805c;font-size:9px}
+.home-emergency h2{font:700 22px/1.3 Manrope,sans-serif;letter-spacing:-.5px;margin:8px 0;color:#25334b}
+.home-emergency p{max-width:720px;margin:0;color:#788397;font-size:11px;line-height:1.75}
+.home-emergency-inner>.btn{font-size:11px}
+.home-about{background:#f6f9fc;border-top:1px solid #edf1f5}
+.home-about-inner{min-height:220px;padding-block:43px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.home-about-inner>div{max-width:650px}
+.home-about-inner h2{font:700 29px/1.25 Manrope,sans-serif;letter-spacing:-.9px;margin:11px 0;color:#1a2740}
+.home-about-inner p{font-size:12px;line-height:1.75;color:#788397;margin:0}
+.about-hero{background:linear-gradient(110deg,#f4f8fc 0%,#fbfcfe 55%,#eef7f4 100%);border-bottom:1px solid #edf1f5}
+.about-hero-inner{min-height:440px;padding-block:70px;display:grid;grid-template-columns:1.1fr .75fr;align-items:center;gap:90px}
+.about-hero-inner h1{max-width:680px;font:800 clamp(43px,5.5vw,67px)/1.08 Manrope,sans-serif;letter-spacing:-3px;color:#19243c;margin:20px 0 17px}
+.about-hero-inner>div:first-child>p{max-width:570px;color:#718097;font-size:15px;line-height:1.8;margin:0 0 25px}
+.about-hero-card{background:#fff;border:1px solid #e9eef2;border-radius:18px;padding:30px;box-shadow:0 20px 60px #29426210}
+.about-hero-mark{width:49px;height:49px;border-radius:15px;background:#e7f4ef;color:#39967e;display:grid;place-items:center;margin-bottom:26px}
+.about-hero-card .card-kicker{margin-top:0}
+.about-hero-card h2{font:700 25px/1.35 Manrope,sans-serif;letter-spacing:-.7px;color:#21314a;margin:11px 0}
+.about-hero-card p{font-size:12px;line-height:1.8;color:#7a8798;margin:0}
+.about-story{padding-block:84px;display:grid;grid-template-columns:.8fr 1.2fr;gap:85px;align-items:start}
+.about-story-label h2,.about-principles h2,.about-capabilities h2,.about-cta h2{font:700 34px/1.25 Manrope,sans-serif;letter-spacing:-1.2px;color:#1a2740;margin:14px 0}
+.about-story-copy p{font-size:14px;line-height:1.9;color:#718097;margin:0 0 16px}
+.about-principles{padding-block:76px;background:#f7f9fb;border-block:1px solid #edf1f5}
+.about-principles h2{margin-bottom:31px}
+.about-principle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.about-principle-grid article{background:#fff;border:1px solid #e9edf2;border-radius:13px;padding:23px;min-height:196px}
+.about-principle-grid article>span{font:700 11px Manrope;color:#49a18a}
+.about-principle-grid h3{font:700 17px/1.4 Manrope,sans-serif;color:#293750;margin:15px 0 8px}
+.about-principle-grid p{font-size:11px;line-height:1.8;color:#7a8798;margin:0}
+.about-capabilities{padding-block:79px}
+.about-capabilities h2{max-width:600px;margin-bottom:27px}
+.about-capability-list{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.about-capability-list>div{display:flex;align-items:flex-start;gap:14px;padding:20px 0;border-top:1px solid #e9edf2}
+.about-capability-list>div>svg{width:19px;height:19px;color:#4d94c8;flex:none;margin-top:2px}
+.about-capability-list span{display:flex;flex-direction:column;gap:6px}
+.about-capability-list b{font:700 13px Manrope;color:#34425a}
+.about-capability-list small{font-size:11px;line-height:1.7;color:#7b8798}
+.about-honesty{background:#f1f7f5;border-block:1px solid #e5efeb}
+.about-honesty-inner{min-height:205px;padding-block:39px;display:grid;grid-template-columns:32px 1fr;align-items:start;gap:17px}
+.about-honesty-inner>svg{color:#42977f;width:25px;height:25px;margin-top:5px}
+.about-honesty h2{font:700 22px Manrope;color:#21334b;margin:8px 0}
+.about-honesty p{max-width:760px;color:#718397;font-size:12px;line-height:1.8;margin:0}
+.about-cta{min-height:190px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.about-cta h2{max-width:590px;font-size:28px;margin:9px 0}
+.about-vision-mission{padding-block:72px;background:#f7f9fb;border-block:1px solid #edf1f5}
+.about-vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.about-vm-grid article{padding:28px;background:#fff;border:1px solid #e9edf2;border-radius:14px}
+.about-vm-grid h2{font:700 22px/1.4 Manrope,sans-serif;letter-spacing:-.4px;color:#26354e;margin:12px 0 9px}
+.about-vm-grid p{font-size:12px;line-height:1.8;color:#778498;margin:0}
+.public-contact{min-height:100vh;display:flex;flex-direction:column}
+.contact-main{flex:1}
+.contact-hero{padding-block:65px 52px;background:#f5f8fc;border-bottom:1px solid #edf1f5}
+.contact-hero h1{font:800 clamp(38px,5vw,56px)/1.1 Manrope,sans-serif;letter-spacing:-2px;color:#1a2740;margin:16px 0 10px}
+.contact-hero p{max-width:620px;color:#718097;font-size:14px;line-height:1.75;margin:0}
+.contact-content{padding-block:47px;display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;align-items:stretch}
+.contact-card,.contact-emergency{border:1px solid #e8edf2;border-radius:14px;background:#fff;padding:27px;box-shadow:0 7px 22px #263b5708}
+.contact-icon{width:43px;height:43px;border-radius:12px;background:#e9f2fd;color:#4d83c7;display:grid;place-items:center;margin-bottom:19px}
+.contact-icon svg{width:19px}
+.contact-card .eyebrow,.contact-emergency .eyebrow{font-size:9px}
+.contact-card h2,.contact-emergency h2{font:700 20px/1.4 Manrope,sans-serif;color:#26354e;margin:10px 0 7px}
+.contact-card>p,.contact-emergency p{font-size:11px;line-height:1.75;color:#778498;margin:0}
+.contact-phone{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding:13px 14px;border-radius:9px;background:#f1f7fe;color:#3479ce;font:700 19px Manrope,sans-serif;letter-spacing:.3px}
+.contact-phone svg{width:16px}
+.contact-card>small{display:block;margin-top:12px;color:#919baa;font-size:9px}
+.contact-emergency{display:grid;grid-template-columns:28px 1fr;align-content:center;gap:15px;background:#fff9f5;border-color:#f1e6dc}
+.contact-emergency>svg{width:22px;color:#be7652}
+.contact-emergency .eyebrow{color:#af7759}
+.contact-emergency p a{font-weight:700;color:#b65d42;text-decoration:underline}
+.emergency-source{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:10px;font-weight:600;color:#9c664b}
+.emergency-source svg{width:12px}
+.contact-note{display:flex;align-items:center;gap:12px;margin-bottom:44px;padding:15px 17px;border:1px solid #e9edf2;border-radius:9px;background:#f8fafc;color:#7d8999}
+.contact-note svg{width:17px;flex:none;color:#6387b3}
+.contact-note p{font-size:10px;line-height:1.65;margin:0}
+.legal-page header>div{display:flex;align-items:center;gap:20px}
+.legal-page header>div a{font-size:11px;color:#6e7d91}
+.legal-page .terms-document{max-width:760px;padding-block:55px}
+.terms-document .eyebrow{font-size:9px}
+.terms-draft-note{display:flex;gap:11px;align-items:flex-start;margin:24px 0;padding:15px;border:1px solid #e9e3d6;background:#fffaf0;border-radius:8px}
+.terms-draft-note svg{width:17px;flex:none;color:#ae8950;margin-top:2px}
+.terms-draft-note p{margin:0!important;color:#776c59!important;font-size:10px!important;line-height:1.7!important}
+.legal-page .terms-document h2{font-size:15px;margin-top:24px}
+.legal-page .terms-document p:not(.legal-lead){font-size:11px;line-height:1.8;color:#748095}
+.legal-page .terms-document p a{color:#347bd5}
+.legal-page .terms-document .btn{margin-top:10px}
+.legal-page>footer a{color:#347bd5}
+@media(max-width:800px){
+  .home-services{padding-block:60px}
+  .home-feature-card{min-height:260px}
+  .home-emergency-inner{grid-template-columns:42px 1fr;gap:13px}
+  .home-emergency-inner>.btn{grid-column:2;justify-self:start}
+  .home-about-inner{min-height:0;padding-block:52px}
+  .about-hero-inner{min-height:0;padding-block:52px;grid-template-columns:1fr;gap:32px}
+  .about-hero-card{max-width:520px}
+  .about-story{padding-block:57px;grid-template-columns:1fr;gap:15px}
+  .about-principle-grid{grid-template-columns:1fr}
+  .about-principle-grid article{min-height:0}
+  .about-capability-list{grid-template-columns:1fr;gap:0}
+  .about-cta{min-height:0;padding-block:48px}
+  .about-vm-grid{grid-template-columns:1fr}
+  .contact-content{grid-template-columns:1fr}
+  .contact-hero{padding-block:50px 38px}
+}
+@media(max-width:500px){
+  .home-feature-card{min-height:255px;padding:19px}
+  .home-emergency-inner{padding-block:25px;grid-template-columns:37px 1fr;gap:10px}
+  .home-emergency-icon{width:37px;height:37px}
+  .home-emergency h2{font-size:18px}
+  .home-emergency p{font-size:10px}
+  .home-about-inner{align-items:flex-start;flex-direction:column;gap:18px}
+  .home-about-inner h2{font-size:24px}
+  .about-hero-inner h1{font-size:43px;letter-spacing:-2px}
+  .about-hero-inner>div:first-child>p{font-size:13px}
+  .about-story-label h2,.about-principles h2,.about-capabilities h2{font-size:28px}
+  .about-story-copy p{font-size:12px}
+  .about-principles{padding-block:55px}
+  .about-capabilities{padding-block:55px}
+  .about-honesty-inner{padding-block:30px}
+  .about-cta{align-items:flex-start;flex-direction:column;gap:8px}
+  .about-cta h2{font-size:24px}
+  .about-vision-mission{padding-block:49px}
+  .about-vm-grid article{padding:21px}
+  .contact-content{padding-block:30px;gap:12px}
+  .contact-card,.contact-emergency{padding:21px}
+  .contact-note{align-items:flex-start;margin-bottom:28px}
+  .legal-page header>div{gap:11px}
+}
