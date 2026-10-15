@@ -31,3 +31,72 @@
 
 .review-moderation-empty{max-width:680px;margin-top:24px;padding:28px;text-align:center}.review-moderation-empty>svg{width:24px;color:#4d9b84}.review-moderation-empty>b{display:block;margin-top:11px;font-size:12px}.review-moderation-empty>p{font-size:10px;color:#8792a3;line-height:1.6}.review-queue{display:grid;gap:12px;margin-top:22px;max-width:850px}.review-queue-card{padding:16px 18px;border:1px solid #e8edf2;background:white;border-radius:10px}.review-queue-top{display:flex;align-items:center;justify-content:space-between}.review-queue-top>div{display:flex;flex-direction:column;gap:4px}.review-queue-top b{font-size:11px}.review-queue-top small{font-size:9px;color:#8c98a7}.review-queue-top>span{font-size:8px;color:#a8793c;background:#fff5e7;border-radius:5px;padding:5px 8px}.review-queue-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.review-queue-columns>div{padding:11px;border-radius:7px;background:#f8fafb}.review-queue-columns b{font-size:9px;color:#617087}.review-queue-columns p{font-size:9px;color:#7a8797;line-height:1.55;margin:7px 0 0}.review-queue-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.review-queue-actions .btn{font-size:9px}
 @media(max-width:500px){.review-queue-columns{grid-template-columns:1fr}.review-queue-card{padding:13px}}
+
+/* Settings page hierarchy */
+.settings-page{display:grid;gap:24px;margin-top:20px;max-width:1120px}
+.settings-group{min-width:0}
+.settings-group-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 2px 10px}
+.settings-group-heading h2{margin:0;color:#27364a;font-size:13px;font-weight:700;letter-spacing:-.01em}
+.settings-group-heading p{margin:0;color:#8b96a5;font-size:10px}
+.settings-layout{margin-top:0;gap:12px}
+.settings-layout-personal{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr)}
+.settings-layout-connections{grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr)}
+.settings-card{padding:20px;border-radius:12px}
+.settings-profile-card .settings-form{grid-template-columns:1fr 1fr;gap:12px}
+.settings-profile-card .settings-form label:first-child{grid-column:1/-1}
+.settings-profile-card .settings-form button{justify-self:start}
+.settings-appearance-card .settings-option{padding:11px 0}
+.settings-appearance-card .settings-toggle{padding:12px 0}
+.settings-referral-card{align-self:start}
+.settings-help-group .settings-group-heading{margin-bottom:10px}
+.support-settings-card{padding:0;overflow:hidden}
+.settings-account{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border:1px solid #e8edf2;border-radius:11px;background:#fbfcfd}
+.settings-account>div{display:flex;align-items:center;gap:11px}
+.settings-account-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#f0f2f5;color:#788496}
+.settings-account>div>span:last-child{display:grid;gap:3px}
+.settings-account b{color:#344257;font-size:10px}
+.settings-account small{color:#8b96a5;font-size:9px}
+@media(max-width:800px){.settings-layout-personal,.settings-layout-connections{grid-template-columns:1fr}.settings-group-heading{align-items:flex-start;flex-direction:column;gap:4px}.settings-page{gap:19px}}
+@media(max-width:500px){.settings-page{margin-top:14px;gap:17px}.settings-card{padding:15px}.settings-profile-card .settings-form{grid-template-columns:1fr}.settings-profile-card .settings-form label:first-child{grid-column:auto}.settings-account{align-items:flex-start}.support-settings-card{padding:0}}
+
+/* Refined settings surfaces and VS Code inspired theme */
+.settings-page{gap:27px}
+.settings-group-heading{padding:0 2px 9px;border-bottom:1px solid #e9edf2}
+.settings-group-heading h2{font-size:14px;letter-spacing:-.025em}
+.settings-group-heading p{font-size:10px}
+.settings-card{box-shadow:0 5px 18px #2c45620a;transition:box-shadow .18s ease,border-color .18s ease,transform .18s ease}
+.settings-card:hover{border-color:#dbe5f0;box-shadow:0 9px 24px #2c456211;transform:translateY(-1px)}
+.settings-card-heading{margin-bottom:19px}
+.settings-card-heading h2{font-size:14px;letter-spacing:-.02em}
+.settings-icon{width:39px;height:39px;border:1px solid #e4edf8;background:linear-gradient(145deg,#f4f8ff,#eaf2fc)}
+.theme-segment{flex:none}
+.theme-segment button{padding:7px 10px;white-space:nowrap}
+.settings-account{transition:border-color .18s ease,background .18s ease}
+.settings-account:hover{border-color:#d8e2ed;background:#f8fafc}
+.dashboard-shell[data-color-theme="vscode"]{--vs-blue:#3794ff;--vs-bg:#1e1e1e;--vs-panel:#252526;--vs-sidebar:#181818;--vs-border:#383838;--vs-text:#d4d4d4;--vs-muted:#a0a0a0;background:var(--vs-bg);color:var(--vs-text)}
+.dashboard-shell[data-color-theme="vscode"] .sidebar{background:var(--vs-sidebar);border-color:#303030}
+.dashboard-shell[data-color-theme="vscode"] .dash-main,.dashboard-shell[data-color-theme="vscode"] .dash-content{background:var(--vs-bg)}
+.dashboard-shell[data-color-theme="vscode"] .dash-topbar{background:#202020;border-color:#333}
+.dashboard-shell[data-color-theme="vscode"] .breadcrumb,.dashboard-shell[data-color-theme="vscode"] .breadcrumb b,.dashboard-shell[data-color-theme="vscode"] .content-heading h1,.dashboard-shell[data-color-theme="vscode"] .settings-group-heading h2{color:var(--vs-text)}
+.dashboard-shell[data-color-theme="vscode"] .content-heading p,.dashboard-shell[data-color-theme="vscode"] .settings-group-heading p,.dashboard-shell[data-color-theme="vscode"] .workspace-label,.dashboard-shell[data-color-theme="vscode"] .user-meta small,.dashboard-shell[data-color-theme="vscode"] .top-user small{color:var(--vs-muted)}
+.dashboard-shell[data-color-theme="vscode"] .settings-card,.dashboard-shell[data-color-theme="vscode"] .panel,.dashboard-shell[data-color-theme="vscode"] .metric-card,.dashboard-shell[data-color-theme="vscode"] .doctor-card,.dashboard-shell[data-color-theme="vscode"] .table-card,.dashboard-shell[data-color-theme="vscode"] .resource-card,.dashboard-shell[data-color-theme="vscode"] .schedule-panel,.dashboard-shell[data-color-theme="vscode"] .clinic-setup-card{background:var(--vs-panel);border-color:var(--vs-border);color:var(--vs-text);box-shadow:0 5px 18px #0002}
+.dashboard-shell[data-color-theme="vscode"] .settings-card:hover{border-color:#4b4b4b;box-shadow:0 9px 24px #0003}
+.dashboard-shell[data-color-theme="vscode"] .settings-card-heading h2,.dashboard-shell[data-color-theme="vscode"] .settings-option b,.dashboard-shell[data-color-theme="vscode"] .settings-toggle b,.dashboard-shell[data-color-theme="vscode"] .settings-profile-card label,.dashboard-shell[data-color-theme="vscode"] .settings-account b{color:var(--vs-text)}
+.dashboard-shell[data-color-theme="vscode"] .settings-card-heading p,.dashboard-shell[data-color-theme="vscode"] .settings-option small,.dashboard-shell[data-color-theme="vscode"] .settings-toggle small,.dashboard-shell[data-color-theme="vscode"] .settings-account small,.dashboard-shell[data-color-theme="vscode"] .referral-copy{color:#a6a6a6}
+.dashboard-shell[data-color-theme="vscode"] .settings-group-heading{border-color:var(--vs-border)}
+.dashboard-shell[data-color-theme="vscode"] .settings-icon{background:#202b38;border-color:#29405a;color:var(--vs-blue)}
+.dashboard-shell[data-color-theme="vscode"] .settings-form input,.dashboard-shell[data-color-theme="vscode"] .referral-link{background:#1e1e1e;border-color:#454545;color:var(--vs-text)}
+.dashboard-shell[data-color-theme="vscode"] .settings-form input[readonly]{background:#2a2d2e;color:#a6a6a6}
+.dashboard-shell[data-color-theme="vscode"] .settings-segment{background:#1b1b1b}
+.dashboard-shell[data-color-theme="vscode"] .settings-segment button{color:#b5b5b5}
+.dashboard-shell[data-color-theme="vscode"] .settings-segment button.selected{background:#37373d;color:#fff;box-shadow:inset 0 -2px var(--vs-blue)}
+.dashboard-shell[data-color-theme="vscode"] .settings-option,.dashboard-shell[data-color-theme="vscode"] .settings-toggle,.dashboard-shell[data-color-theme="vscode"] .family-member{border-color:var(--vs-border)}
+.dashboard-shell[data-color-theme="vscode"] .settings-account{background:#252526;border-color:var(--vs-border)}
+.dashboard-shell[data-color-theme="vscode"] .settings-account-icon{background:#202b38;color:var(--vs-blue)}
+.dashboard-shell[data-color-theme="vscode"] .side-nav button.active,.dashboard-shell[data-color-theme="vscode"] .side-nav button:hover{background:#252526;color:#75beff}
+.dashboard-shell[data-color-theme="vscode"] .btn-light{background:#2d2d30;border-color:#454545;color:#d4d4d4}
+.dashboard-shell[data-color-theme="vscode"] .btn-primary{background:#0e639c;border-color:#0e639c;color:#fff}
+.dashboard-shell[data-color-theme="vscode"] .btn-primary:hover{background:#1177bb}
+.dashboard-shell[data-color-theme="vscode"] .support-settings-card{background:var(--vs-panel)}
+@media(max-width:800px){.settings-page{gap:21px}}
+@media(max-width:500px){.settings-page{gap:18px}.theme-segment{align-self:flex-start}.theme-segment button{padding:7px 8px;font-size:7px}}
